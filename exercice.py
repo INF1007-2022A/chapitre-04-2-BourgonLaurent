@@ -17,12 +17,39 @@ def get_random_sentence(animals: tuple, adjectives: tuple, fruits: tuple) -> str
     )
 
 
-def encrypt(text, shift):
-    return ""
+def cesar_cipher(text: str, shift: int, reverse: bool = False) -> str:
+    alpha_maj = (ord("A"), ord("Z"))
+
+    encrypted_string = ""
+
+    if reverse:
+        shift = -shift
+
+    for char in text:
+        # use only uppercase
+        c_id = ord(char.upper())
+
+        # check if needs to be shifted
+        if alpha_maj[0] <= c_id <= alpha_maj[1]:
+            # remove base, shifting between A - Z
+            shifted_id = (c_id - alpha_maj[0] + shift) % 26
+
+            # shift back character before adding it
+            new_char = chr(shifted_id + alpha_maj[0])
+        else:
+            new_char = char
+
+        encrypted_string += new_char
+
+    return encrypted_string
 
 
-def decrypt(encrypted_text, shift):
-    return ""
+def encrypt(text: str, shift: int) -> str:
+    return cesar_cipher(text, shift)
+
+
+def decrypt(encrypted_text: str, shift: int) -> str:
+    return cesar_cipher(encrypted_text, shift, reverse=True)
 
 
 if __name__ == "__main__":
