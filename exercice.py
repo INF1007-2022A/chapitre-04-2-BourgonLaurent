@@ -3,8 +3,11 @@
 
 import random
 
-def get_first_part_of_name(name):
-	return ""
+
+def get_first_part_of_name(name: str):
+    premier_prenom = name.split("-")[0].title()
+    return f"Bonjour, {premier_prenom}"
+
 
 def get_random_sentence(animals, adjectives, fruits):
 	return ""
